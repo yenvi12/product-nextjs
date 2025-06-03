@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ProductDetail() {
   const router = useRouter();
@@ -11,8 +12,8 @@ export default function ProductDetail() {
   useEffect(() => {
     if (id) {
       fetch(`/api/products/${id}`)
-        .then(res => res.json())
-        .then(data => setProduct(data));
+        .then((res) => res.json())
+        .then((data) => setProduct(data));
     }
   }, [id]);
 
@@ -28,9 +29,23 @@ export default function ProductDetail() {
   return (
     <div>
       <h1>{product.name}</h1>
-      <p><strong>Giá:</strong> {product.price.toLocaleString()} VND</p>
-      <p><strong>Mô tả:</strong> {product.description}</p>
-      {product.image && <img src={product.image} width={300} alt={product.name} />}
+      <p>
+        <strong>Giá:</strong> {product.price.toLocaleString()} VND
+      </p>
+      <p>
+        <strong>Mô tả:</strong> {product.description}
+      </p>
+
+      {product.image && (
+        <Image
+          src={product.image}
+          alt={product.name}
+          width={300}
+          height={200}
+          unoptimized // Xóa dòng này nếu bạn đã thêm domain ảnh vào next.config.js
+        />
+      )}
+
       <br />
       <Link href={`/edit/${product._id}`}>✏️ Sửa</Link>
       <button onClick={handleDelete}>🗑️ Xoá</button>
