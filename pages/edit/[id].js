@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function EditProduct() {
   const router = useRouter();
@@ -79,7 +80,7 @@ export default function EditProduct() {
         <button type="submit">Lưu</button>
       </form>
       <br />
-      <a href="/">← Về trang chủ</a>
+      <Link href="/">← Về trang chủ</Link>
     </div>
   );
 }
